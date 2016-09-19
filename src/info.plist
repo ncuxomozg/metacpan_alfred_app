@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>metacpan_api</string>
+	<key>category</key>
+	<string>Internet</string>
+	<key>connections</key>
+	<dict>
+		<key>C373E845-8E1E-4CC9-9EF8-52B1726E1BC4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4E1872BD-5D0D-43FF-B007-9B1DF7843993</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>ncuxomozg</string>
+	<key>description</key>
+	<string>metacpan search api</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>metacpan</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>cpan</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>search...</string>
+				<key>script</key>
+				<string>use lib 'lib';
+use MetaCpan qw| search |;
+
+BEGIN { $ENV{'PERL_LWP_SSL_VERIFY_HOSTNAME'} = 0; };
+
+my $query = '{query}';
+my $search = search($query);
+
+print $search;</string>
+				<key>title</key>
+				<string>search in metacpan</string>
+				<key>type</key>
+				<integer>4</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>C373E845-8E1E-4CC9-9EF8-52B1726E1BC4</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>plusspaces</key>
+				<false/>
+				<key>url</key>
+				<string>https://metacpan.org/pod/{query}</string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>4E1872BD-5D0D-43FF-B007-9B1DF7843993</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>4E1872BD-5D0D-43FF-B007-9B1DF7843993</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
+		<key>C373E845-8E1E-4CC9-9EF8-52B1726E1BC4</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string></string>
+</dict>
+</plist>
