@@ -1,0 +1,3 @@
+[submodule "src/external"]
+	path = src/external
+	url = git@github.com:ncuxomozg/alfred_perl_module.git

@@ -2,10 +2,12 @@ package MetaCpan;
 
 use strict;
 use warnings;
+use lib '../external/lib';
 
 use LWP::UserAgent;
 use JSON::XS;
 use Exporter qw| import |;
+use Alfred;
 
 our @EXPORT_OK = qw| search |;
 
@@ -18,27 +20,23 @@ sub search {
     return undef unless $query;
 
     my $response = $ua->get( $link . $query );
-
     my $json =  decode_json $response->content;
-    return _to_xml( $json ) if ( $response->is_success ); 
-    return undef;
-}
 
-sub _to_xml {
-    my $data = shift;
-
-    my $xml = q|<?xml version="1.0"?><items>|;
-    foreach my $item ( @{ $data }) {
-       $xml .= qq|
-            <item autocomplete='$item->{documentation}' arg="$item->{documentation}">
-                <title>$item->{documentation}</title>
-                <subtitle>release: $item->{release}</subtitle>
-                <icon>metacpan.png</icon>
-            </item>
-       |;
+    if ( $response->is_success ) {
+        my $alfred = Alfred->new();
+        foreach my $item ( @{ $json } ) {
+            $alfred->add({
+                autocomplete => $item->{documentation},
+                arg          => $item->{documentation},
+                title        => $item->{documentation},
+                subtitle     => 'release: ' . $item->{release},
+                icon         => 'metacpan.png',
+            });
+        }
+        return $alfred->xml;
     }
 
-    $xml .= q|</items>|;
+    return undef;
 }
 
 1;
