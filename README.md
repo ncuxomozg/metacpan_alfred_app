@@ -2,6 +2,6 @@
 Fast access to metacpan in alfred.app.
 
 # Source
-I'm using git submodules, so please, use this commands before:
+I'm using git submodules, so please, use this command before:
 
     git submodule update --init --recorsive
