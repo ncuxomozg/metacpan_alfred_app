@@ -38,7 +38,7 @@ sub _to_xml {
        |;
     }
 
-    $xml .= q|</items></xml>|;
+    $xml .= q|</items>|;
 }
 
 1;
