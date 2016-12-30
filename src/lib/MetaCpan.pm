@@ -3,6 +3,7 @@ package MetaCpan;
 use strict;
 use warnings;
 use lib '../external/lib';
+use Data::Dumper;
 
 use LWP::UserAgent;
 use JSON::XS;
@@ -24,12 +25,13 @@ sub search {
 
     if ( $response->is_success ) {
         my $alfred = Alfred->new();
-        foreach my $item ( @{ $json } ) {
+        warn Dumper $json;
+        foreach my $item ( @{ $json->{suggestions} } ) {
             $alfred->add({
-                autocomplete => $item->{documentation},
-                arg          => $item->{documentation},
-                title        => $item->{documentation},
-                subtitle     => 'release: ' . $item->{release},
+                autocomplete => $item->{value},
+                arg          => $item->{value},
+                title        => $item->{value},
+                #subtitle     => 'release: ' . $item->{release},
                 icon         => 'metacpan.png',
             });
         }
